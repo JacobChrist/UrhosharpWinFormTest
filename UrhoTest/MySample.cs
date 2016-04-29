@@ -99,8 +99,10 @@ namespace UrhoTest
     class MySample : Application
     {
         bool movementsEnabled;
-        Node plotNode;
-        Node barNode;
+        Scene scene;
+        Node planeNode;
+        Node boxNode;
+        Node sphereNode;
 
         public float y_speed = 0;
 
@@ -119,11 +121,13 @@ namespace UrhoTest
             Input.MouseMode = MouseMode.Absolute; // Use OS Mouse
             Input.MouseGrabbed = false;
 
-            Input.KeyDown += (args) => {
-                if (args.Key == Key.Esc) Engine.Exit();
-            };
-
+            //Input.KeyDown += HandleKeyDown;
             Input.MouseButtonDown += HandleMouseButtonDown;
+        }
+        void HandleKeyDown(KeyDownEventArgs args)
+        {
+            //this.Engine.Exit();
+            System.Console.WriteLine("key pressed");
         }
 
         void HandleMouseButtonDown(MouseButtonDownEventArgs args)
@@ -133,7 +137,8 @@ namespace UrhoTest
 
         async void CreateScene()
         {
-            var scene = new Scene();
+            scene = new Scene();
+
             // Create the Octree component to the scene. This is required before
             // adding any drawable components, or else nothing will show up. The
             // default octree volume will be from -1000, -1000, -1000) to 
@@ -141,30 +146,49 @@ namespace UrhoTest
             // objects outside the volume but their visibility can then not be
             // checked in a hierarchically optimizing manner
             scene.CreateComponent<Octree>();
+
             // Create a child scene node (at world origin) and a StaticModel
             // component into it. Set the StaticModel to show a simple plane mesh
-            // with a "stone" material. Note that naming the scene nodes is
+            // with a material. Note that naming the scene nodes is
             // optional. Scale the scene node larger (100 x 100 world units)
-            var planeNode = scene.CreateChild("Plane");
-            planeNode.Scale = new Vector3(100, 1, 100);
+            planeNode = scene.CreateChild("Mushroom");
+            planeNode.Scale = new Vector3(25, 25, 25);
+            planeNode.Position = new Vector3(0.0f, 0.0f, 0.0f);
             var planeObject = planeNode.CreateComponent<StaticModel>();
-            planeObject.Model = ResourceCache.GetModel("Models/Plane.mdl");
-            planeObject.SetMaterial(ResourceCache.GetMaterial("Materials/StoneTiled.xml"));
+            planeObject.Model = ResourceCache.GetModel("Models/Mushroom.mdl");
+            planeObject.SetMaterial(ResourceCache.GetMaterial("Materials/Mushroom.xml"));
 
-            // Create a directional light to the world so that we can see something. The
-            // light scene node's orientation controls the light direction; we will use
-            // the SetDirection() function which calculates the orientation from a forward
-            // direction vector.
-            // The light will use default settings (white light, no shadows)
+
+            // Create a child scene node that uses a primitive
+            boxNode = scene.CreateChild("Box Primitive");
+            boxNode.Scale = new Vector3(10.0f, 10.0f, 10.0f);
+            boxNode.Position = new Vector3(25.0f, 5.0f, 0.0f);
+            var box = boxNode.CreateComponent<Box>();
+            box.Color = Color.Yellow;
+
+            sphereNode = scene.CreateChild("Box Primitive");
+            sphereNode.Scale = new Vector3(10.0f, 10.0f, 10.0f);
+            sphereNode.Position = new Vector3(-25.0f, 5.0f, 0.0f);
+            var sphere = sphereNode.CreateComponent<Sphere>();
+            sphere.Color = Color.Red;
+
+            // Add a light to the world so that we can see something. 
             var lightNode = scene.CreateChild("DirectionalLight");
-            lightNode.SetDirection(new Vector3(0.6f, -1.0f, 0.8f));
-            lightNode.Position = new Vector3(0, 50, -10);
-            //lightNode.Rotation = new Quaternion(45, 0, 0);
+            //lightNode.SetDirection(new Vector3(0.6f, 1.0f, 0.8f));
+            lightNode.Position = new Vector3(0, -20, 10);
+            lightNode.Rotation = new Quaternion(10, 10, 0);
+
             var light = lightNode.CreateComponent<Light>();
+            light.Brightness = 0.9f;
+            light.LightType = LightType.Directional;
+            //light.LightType = LightType.Spot;
+            //light.Fov = 500.5f;
+            //light.Range = 0.1f;
 
             var CameraNode = scene.CreateChild("camera");
             var camera = CameraNode.CreateComponent<Camera>();
             //camera.Orthographic = true;
+
             // Top View
             CameraNode.Position = new Vector3(0, 200, 0);
             CameraNode.Rotation = new Quaternion(90, 0, 0);
@@ -173,22 +197,13 @@ namespace UrhoTest
             CameraNode.Position = new Vector3(0, 10, -100);
             CameraNode.Rotation = new Quaternion(10, 0, 0);
 
-            //Renderer.SetViewport(0, new Viewport(Context, scene, camera, null));
             var viewport = new Viewport(Context, scene, camera, null);
             Renderer.SetViewport(0, viewport);
             viewport.SetClearColor(Color.Gray);
 
             var myLight = lightNode.GetComponent<Light>();
 
-
-            barNode = planeNode.CreateChild();
-            barNode.Scale = new Vector3(0.1f, 50, 0.1f); //means zero height
-            var box = barNode.CreateComponent<Box>();
-            box.Color = Color.Yellow;
-
-            plotNode = planeNode;
-
-            await plotNode.RunActionsAsync(new EaseBackOut(new RotateBy(2f, 0, 360, 0)));
+            await planeNode.RunActionsAsync(new EaseBackOut(new RotateBy(2f, 0, 360, 0)));
             movementsEnabled = true;
         }
         protected override void OnUpdate(float timeStep)
@@ -196,12 +211,14 @@ namespace UrhoTest
             if (Input.NumTouches == 1 && movementsEnabled)
             {
                 var touch = Input.GetTouch(0);
-                //plotNode.Rotate(new Quaternion(-touch.Delta.Y, 0, -touch.Delta.X), TransformSpace.Local);
-                barNode.Translate(new Vector3(touch.Delta.X, 0, -touch.Delta.Y), TransformSpace.World);
+                //planeNode.Rotate(new Quaternion(-touch.Delta.Y, 0, -touch.Delta.X), TransformSpace.Local);
+                //barNode.Translate(new Vector3(touch.Delta.X, 0, -touch.Delta.Y), TransformSpace.World);
+                planeNode.Translate(new Vector3(touch.Delta.X, 0, -touch.Delta.Y), TransformSpace.World);
             }
             //else
             {
-                plotNode.Rotate(new Quaternion(0, y_speed, 0) * timeStep, TransformSpace.Local);
+                planeNode.Rotate(new Quaternion(y_speed, 0, 0) * timeStep, TransformSpace.Local);
+                sphereNode.Translate(new Vector3(0, y_speed, 0), TransformSpace.Local);
             }
             base.OnUpdate(timeStep);
         }

@@ -28,24 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.StandaloneButton = new System.Windows.Forms.Button();
             this.urhoSurfacePlaceholder = new System.Windows.Forms.Panel();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.RebuildButton = new System.Windows.Forms.Button();
+            this.RotatePlusButton = new System.Windows.Forms.Button();
+            this.StopButton = new System.Windows.Forms.Button();
+            this.RotateMinusButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // StandaloneButton
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(390, 355);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.StandaloneButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.StandaloneButton.Location = new System.Drawing.Point(147, 355);
+            this.StandaloneButton.Name = "StandaloneButton";
+            this.StandaloneButton.Size = new System.Drawing.Size(75, 23);
+            this.StandaloneButton.TabIndex = 0;
+            this.StandaloneButton.Text = "Standalone";
+            this.StandaloneButton.UseVisualStyleBackColor = true;
+            this.StandaloneButton.Visible = false;
+            this.StandaloneButton.Click += new System.EventHandler(this.StandaloneButton_Click);
             // 
             // urhoSurfacePlaceholder
             // 
@@ -58,64 +59,65 @@
             this.urhoSurfacePlaceholder.Size = new System.Drawing.Size(453, 337);
             this.urhoSurfacePlaceholder.TabIndex = 1;
             // 
-            // button2
+            // RebuildButton
             // 
-            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(309, 355);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.RebuildButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.RebuildButton.Location = new System.Drawing.Point(66, 355);
+            this.RebuildButton.Name = "RebuildButton";
+            this.RebuildButton.Size = new System.Drawing.Size(75, 23);
+            this.RebuildButton.TabIndex = 2;
+            this.RebuildButton.Text = "Build";
+            this.RebuildButton.UseVisualStyleBackColor = true;
+            this.RebuildButton.Visible = false;
+            this.RebuildButton.Click += new System.EventHandler(this.BuildButton_Click);
             // 
-            // button3
+            // RotatePlusButton
             // 
-            this.button3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button3.Location = new System.Drawing.Point(228, 355);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.RotatePlusButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.RotatePlusButton.Location = new System.Drawing.Point(390, 355);
+            this.RotatePlusButton.Name = "RotatePlusButton";
+            this.RotatePlusButton.Size = new System.Drawing.Size(75, 23);
+            this.RotatePlusButton.TabIndex = 3;
+            this.RotatePlusButton.Text = "Rotate +";
+            this.RotatePlusButton.UseVisualStyleBackColor = true;
+            this.RotatePlusButton.Click += new System.EventHandler(this.RotatePlusButton_Click);
             // 
-            // button4
+            // StopButton
             // 
-            this.button4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button4.Location = new System.Drawing.Point(147, 355);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 4;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.StopButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.StopButton.Location = new System.Drawing.Point(309, 355);
+            this.StopButton.Name = "StopButton";
+            this.StopButton.Size = new System.Drawing.Size(75, 23);
+            this.StopButton.TabIndex = 4;
+            this.StopButton.Text = "Stop";
+            this.StopButton.UseVisualStyleBackColor = true;
+            this.StopButton.Click += new System.EventHandler(this.StopButton_Click);
             // 
-            // button5
+            // RotateMinusButton
             // 
-            this.button5.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button5.Location = new System.Drawing.Point(66, 355);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
-            this.button5.TabIndex = 5;
-            this.button5.Text = "button5";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.RotateMinusButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.RotateMinusButton.Location = new System.Drawing.Point(228, 355);
+            this.RotateMinusButton.Name = "RotateMinusButton";
+            this.RotateMinusButton.Size = new System.Drawing.Size(75, 23);
+            this.RotateMinusButton.TabIndex = 5;
+            this.RotateMinusButton.Text = "Rotate -";
+            this.RotateMinusButton.UseVisualStyleBackColor = true;
+            this.RotateMinusButton.Click += new System.EventHandler(this.RotateMinusButton_Click);
             // 
             // UrhoPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(477, 390);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.RotateMinusButton);
+            this.Controls.Add(this.StopButton);
+            this.Controls.Add(this.RotatePlusButton);
+            this.Controls.Add(this.RebuildButton);
             this.Controls.Add(this.urhoSurfacePlaceholder);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.StandaloneButton);
             this.Name = "UrhoPanel";
             this.Text = "Urho Panel";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.UrhoPanel_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
@@ -123,12 +125,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button StandaloneButton;
         private System.Windows.Forms.Panel urhoSurfacePlaceholder;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button RebuildButton;
+        private System.Windows.Forms.Button RotatePlusButton;
+        private System.Windows.Forms.Button StopButton;
+        private System.Windows.Forms.Button RotateMinusButton;
     }
 }
 
